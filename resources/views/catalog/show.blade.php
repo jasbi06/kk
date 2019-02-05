@@ -5,50 +5,48 @@
     <div class="row">
 
         <div class="col-sm-4">
-            <img src="{{$peliculas->poster}}" style="height:300px"/>
+
+            <a href="{{ url('/catalog/show/' . $pelicula->id ) }}">
+                <img src="{{$pelicula->poster}}" style="height:200px"/>
+            </a>
 
         </div>
         <div class="col-sm-8">
-            <h2>{{$peliculas->title}}</h2>
-            <h4>Año: {{$peliculas->year}}</h4>
-            <h4>Director: {{$peliculas->director}}</h4>
-            <p><b>Resumen:</b> {{$peliculas->synopsis}}</p>
 
-            @if($peliculas->rented!=false)
-            <p><b>Estado:</b> Película disponible</p>
-                <button type="button" class="btn btn-primary">Alquilar película</button>
-            @else
-                <p><b>Estado:</b> Película actualmente alquilada </p>
-                <button type="button" class="btn btn-danger">Devolver película</button>
-            @endif
+            <h4>{{$pelicula->title}}</h4>
+            <h6>A&ntilde;o: {{$pelicula->year}}</h6>
+            <h6>Director: {{$pelicula->director}}</h6>
+            <p><strong>Resumen:</strong> {{$pelicula->synopsis}}</p>
+            <p><strong>Estado: </strong>
+                @if($pelicula->rented)
+                    Pel&iacute;cula actualmente alquilada.
+                    @php
+                    $class = "btn btn-danger";
+                    $texto = "Devolver";
+                    @endphp
+                @else
+                    Pel&iacute;cula en stock.
+                    @php
+                        $class = "btn btn-success";
+                        $texto = "Alquilar";
+                    @endphp
+                @endif
+            </p>
 
-            @if($peliculas->rented)
-                <p><b>Estado:</b> Pelicula actualmente alquilada</p>
-                @php
-                $class = "btn btn-danger";
-                $texto ="Devolver";
-                @endphp
-            @else
-                <p><b>Estado:</b> Pelicula en stock</p>
-                @php
-                    $class = "btn btn-success";
-                    $texto ="Alquilar";
-                @endphp
-            @endif
-
-            <form action="{{ url('catalog/changeRented/' .$peliculas->id) }}" method="POST">
-                {{method_field('PUT')}}
+            <form action="{{ url('catalog/changeRented/' . $pelicula->id) }}" method="POST">
+                {{ method_field('PUT') }}
                 @csrf
-
-                <button type="button" class="{{$clase}}"><i class="fas fa-highlighter"></i>{{$texto}}</button>
-
+                <input type="submit"  class="{{$class}}" value="{{$texto}}" />
             </form>
 
-           <!-- <a href="/catalog/edit/{{$peliculas->id}}"><button type="button" class="btn btn-warning"><i class="fas fa-highlighter"></i> Editar Pelicula</button></a> -->
 
-            <a href="/catalog"><button type="button" class="btn btn-light"><i class="fas fa-arrow-left"></i> Volver al listado</button></a>
+            <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $pelicula->id ) }}">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Editar pel&iacute;cula</a>
+            <a class="btn btn-outline-info" href="{{ action('CatalogController@getIndex') }}">Volver al listado</a>
 
         </div>
     </div>
+
 
 @stop

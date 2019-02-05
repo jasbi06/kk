@@ -13,19 +13,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        self::seedCatalog();
-        $this->command->info('Tabla catálogo inicializada con datos!');
+          self::seedCatalog();
+          $this->command->info('Tabla catálogo inicializada con datos!');
     }
-
-    private static function seedCatalog(){
-
-       /* $peliculas = Movie::all();
-        foreach ($peliculas as $pelicula){
-            echo $pelicula->delete();
-        }
-       */
+    
+    private static function seedCatalog()
+    {
         Movie::truncate();
-
+        
+//        $peliculas = Movie::all();
+//
+//        foreach( $peliculas as $pelicula ) {
+//            echo $pelicula->delete();
+//        }
+        
         foreach( self::$arrayPeliculas as $pelicula ) {
             $p = new Movie;
             $p->title = $pelicula['title'];
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder
             $p->save();
         }
     }
-
+    
     private static $arrayPeliculas = array(
         array(
             'title' => 'El padrino',
@@ -51,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'El Padrino. Parte II',
             'year' => '1974',
             'director' => 'Francis Ford Coppola',
-            'poster' => 'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR3,0,182,268_AL_.jpg',
+            'poster' => 'http://ia.media-imdb.com/images/M/MV5BNDc2NTM3MzU1Nl5BMl5BanBnXkFtZTcwMTA5Mzg3OA@@._V1_SX214_AL_.jpg',
             'rented' => false,
             'synopsis' => 'Continuación de la historia de los Corleone por medio de dos historias paralelas: la elección de Michael Corleone como jefe de los negocios familiares y los orígenes del patriarca, el ya fallecido Don Vito, primero en Sicilia y luego en Estados Unidos, donde, empezando desde abajo, llegó a ser un poderosísimo jefe de la mafia de Nueva York.'
         ),
@@ -147,7 +148,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Seven',
             'year' => '1995',
             'director' => 'David Fincher',
-            'poster' => 'https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg',
+            'poster' => 'http://ia.media-imdb.com/images/M/MV5BMTQwNTU3MTE4NF5BMl5BanBnXkFtZTcwOTgxNDM2Mg@@._V1_SX214_AL_.jpg',
             'rented' => true,
             'synopsis' => 'El veterano teniente Somerset (Morgan Freeman), del departamento de homicidios, está a punto de jubilarse y ser reemplazado por el ambicioso e impulsivo detective David Mills (Brad Pitt). Ambos tendrán que colaborar en la resolución de una serie de asesinatos cometidos por un psicópata que toma como base la relación de los siete pecados capitales: gula, pereza, soberbia, avaricia, envidia, lujuria e ira. Los cuerpos de las víctimas, sobre los que el asesino se ensaña de manera impúdica, se convertirán para los policías en un enigma que les obligará a viajar al horror y la barbarie más absoluta.'
         ),
@@ -187,7 +188,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Taxi Driver',
             'year' => '1976',
             'director' => 'Martin Scorsese',
-            'poster' => 'https://m.media-amazon.com/images/M/MV5BM2M1MmVhNDgtNmI0YS00ZDNmLTkyNjctNTJiYTQ2N2NmYzc2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX182_CR0,0,182,268_AL_.jpg',
+            'poster' => 'http://ia.media-imdb.com/images/M/MV5BMTQ1Nzg3MDQwN15BMl5BanBnXkFtZTcwNDE2NDU2MQ@@._V1_SY317_CR9,0,214,317_AL_.jpg',
             'rented' => false,
             'synopsis' => 'Para sobrellevar el insomnio crónico que sufre desde su regreso de Vietnam, Travis Bickle (Robert De Niro) trabaja como taxista nocturno en Nueva York. Es un hombre insociable que apenas tiene contacto con los demás, se pasa los días en el cine y vive prendado de Betsy (Cybill Shepherd), una atractiva rubia que trabaja como voluntaria en una campaña política. Pero lo que realmente obsesiona a Travis es comprobar cómo la violencia, la sordidez y la desolación dominan la ciudad. Y un día decide pasar a la acción.'
         ),
@@ -200,6 +201,5 @@ class DatabaseSeeder extends Seeder
             'synopsis' => 'Un joven hastiado de su gris y monótona vida lucha contra el insomnio. En un viaje en avión conoce a un carismático vendedor de jabón que sostiene una teoría muy particular: el perfeccionismo es cosa de gentes débiles; sólo la autodestrucción hace que la vida merezca la pena. Ambos deciden entonces fundar un club secreto de lucha, donde poder descargar sus frustaciones y su ira, que tendrá un éxito arrollador.'
         )
     );
-
 
 }

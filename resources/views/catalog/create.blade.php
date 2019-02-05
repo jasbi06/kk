@@ -2,24 +2,52 @@
 
 @section('content')
 
-    <h2>Añadir pelicula</h2>
-    <form method="post" action="">
-        <label class="description" for="title">Titulo: </label>
-        <input id="element_1" name="title" class="element text medium" type="text" maxlength="255" value=""/>
-        <br><br>
-        <label class="description" for="year">Año: </label>
-        <input id="element_2" name="year" class="element text medium" type="text" maxlength="255" value=""/>
-        <br><br>
-        <label class="description" for="director">Director: </label>
-        <input id="element_3" name="director" class="element text medium" type="text" maxlength="255" value=""/>
-        <br><br>
-        <label class="description" for="poster">Poster: </label>
-        <input id="element_4" name="poster" class="element text medium" type="text" maxlength="255" value=""/>
-        <br><br>
-        <label class="description" for="synopsis">Resumen: </label>
-        <textarea id="element_5" name="synopsis" class="element textarea medium"></textarea>
-        <br><br>
-        <input id="saveForm" class="button_text" type="submit" name="submit" value="Añadir Pelicula" />
-    </form>
+    <div class="row" style="margin-top:40px">
+        <div class="offset-md-3 col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    Añadir película
+                </div>
+                <div class="card-body" style="padding:30px">
+
+                    <form action="{{ url('foo/bar') }}" method="POST">
+
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="title">Título</label>
+                            <input type="text" name="title" id="title" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" min="1900" max="2030" name="year" placeholder="A&ntilde;o">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="director" placeholder="Director">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="url" name="poster" placeholder="url del poster">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="synopsis">Resumen</label>
+                            <textarea name="synopsis" id="synopsis" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
+                                Añadir película
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 @stop

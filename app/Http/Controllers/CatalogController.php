@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Movie;
 use Illuminate\Http\Request;
+use App\Movie;
 
 class CatalogController extends Controller
 {
+
     public function getIndex()
     {
-       // $pelis = $this->arrayPeliculas;
         $arrayPeliculas = Movie::all();
-        return view('catalog.index')->with('arrayPeliculas',$arrayPeliculas);
+        return view('catalog.index', array('arrayPeliculas'=> $arrayPeliculas));
     }
 
     public function getShow($id)
     {
-       // $pelis = $this->arrayPeliculas[$id];
-        $peliculas = Movie::findOrFail($id);
-
-        return view('catalog.show', array('peliculas'=>$peliculas));
+        $pelicula = Movie::findOrFail($id);
+        return view('catalog.show', array(
+            'pelicula' => $pelicula
+        ));
     }
 
     public function getCreate()
@@ -29,16 +29,15 @@ class CatalogController extends Controller
 
     public function getEdit($id)
     {
-        //$pelis = $this->arrayPeliculas[$id];
-        $peliculas = Movie::findOrFail($id);
-        return view('catalog.edit', array('peliculas'=>$peliculas));
+        return view('catalog.edit', array('id'=>$id));
     }
 
-    public function changeRented($id){
-
-        $movie = Movie::findOrFail($id);
-        return view('catalog.changeRented', array('movie'=>$movie));
+    public function changeRented($id)
+    {
+        $pelicula = Movie::findOrFail($id);
+        $pelicula->rented = !$pelicula->rented;
+        $pelicula->save();
+        return back();
     }
-
 
 }
